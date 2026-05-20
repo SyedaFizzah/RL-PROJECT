@@ -20,10 +20,12 @@ app = FastAPI(title="Task Scheduler API")
 # Allow the React frontend to call this API without being blocked
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000"],
+    allow_origins=["https://rl-project-omega.vercel.app"],
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],  # ← add OPTIONS
     allow_headers=["*"],
+    expose_headers=["*"],
+    max_age=600,
 )
 
 # Load the trained DQN agent once when the server starts
